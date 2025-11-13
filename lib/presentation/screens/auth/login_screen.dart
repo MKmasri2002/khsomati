@@ -38,10 +38,27 @@ class _LoginScreenState extends State<LoginScreen> {
                       Align(
                         alignment: Alignment.topLeft,
                         child: Text(
-                          'Welcome To Khosomati Sales',
+                          'Welcome To',
                           style: TextStyle(
-                            fontSize: 26,
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Lato',
+                            fontSize: 14,
+                            height: 1.0,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w500,
+                            color: Color(0xFF004445),
+                          ),
+                        ),
+                      ),
+                      Align(
+                        alignment: Alignment.topLeft,
+                        child: Text(
+                          'Khosomati',
+                          style: TextStyle(
+                            fontFamily: 'Lato',
+                            fontSize: 22.39,
+                            fontWeight: FontWeight.w700,
+                            height: 1.0,
+                            letterSpacing: 0,
                             color: Color(0xFF004445),
                           ),
                         ),
@@ -52,8 +69,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         child: Text(
                           'Enter Mobile Number',
                           style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+                            fontFamily: 'Lato',
+                            fontSize: 14,
+                            height: 1.0,
+                            letterSpacing: 0,
+                            fontWeight: FontWeight.w500,
                             color: Color(0xFF004445),
                           ),
                         ),
