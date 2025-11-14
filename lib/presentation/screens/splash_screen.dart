@@ -33,12 +33,6 @@ class _SplashScreenState extends State<SplashScreen>
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/onBoarding');
       }
-<<<<<<< HEAD
-=======
-    });
-    Future.delayed(Duration(seconds: 5), () {
-      Navigator.pushReplacementNamed(context, RouteString.login);
->>>>>>> 60c20e4302633ed2a9370b3df7b2c8d4f3eca208
     });
   }
 
