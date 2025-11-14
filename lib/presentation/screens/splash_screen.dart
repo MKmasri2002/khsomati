@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_constant.dart';
+import 'package:khsomati/router/route_string.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -19,7 +20,6 @@ class _SplashScreenState extends State<SplashScreen>
   void initState() {
     super.initState();
 
-<<<<<<< HEAD
     _controller = AnimationController(
       vsync: this,
       duration: const Duration(milliseconds: 1500),
@@ -33,14 +33,9 @@ class _SplashScreenState extends State<SplashScreen>
       if (mounted) {
         Navigator.pushReplacementNamed(context, '/onBoarding');
       }
-=======
+    });
     Future.delayed(Duration(seconds: 5), () {
-<<<<<<< HEAD
-      Navigator.pushReplacementNamed(context, '/login');
-=======
       Navigator.pushReplacementNamed(context, RouteString.login);
->>>>>>> 3e5496cba8fdd0929f9d7f42a47dcb9e5d641475
->>>>>>> cb65da552601111d97a844b0f127467421534283
     });
   }
 
