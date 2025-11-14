@@ -38,7 +38,7 @@ class _OtpState extends State<Otp> {
 
                   Center(
                     child: Pinput(
-                      length: 5,
+                      length: 6,
                       controller: pinController,
                       focusNode: focusNode,
 
