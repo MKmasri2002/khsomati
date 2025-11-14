@@ -5,6 +5,7 @@ class UserModel {
   String? phone;
   String? gender;
   String? date;
+  String? token;
 
   UserModel({
     this.id,
@@ -13,6 +14,7 @@ class UserModel {
     this.phone,
     this.gender,
     this.date,
+    this.token,
   });
 
   factory UserModel.fromJson(Map<String, dynamic> json) {
@@ -23,6 +25,7 @@ class UserModel {
       phone: json['phone'],
       gender: json['gender'],
       date: json['date'],
+      token: json['token'],
     );
   }
 }

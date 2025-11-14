@@ -50,7 +50,9 @@ class AuthCubit extends Cubit<AuthState> {
       final UserModel userModel = UserModel(
         id: userCredential.user?.uid,
         phone: userCredential.user?.phoneNumber,
+        token: await userCredential.user!.getIdToken(),
       );
+      
       emit(AuthLogedIn(userModel));
     } catch (e) {
       emit(AuthError("message : $e"));
