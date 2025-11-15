@@ -14,8 +14,7 @@ class LocalizationCubit extends Cubit<LocalizationState> {
   }
 
   Future<void> loadLanguage(String code) async {
-    
-    final map = code=='ar'?Ar.trannslation:En.trannslation;
+    final map = code == 'ar' ? Ar.trannslation : En.trannslation;
 
     emit(LocalizationState(localizationString: map, locale: Locale(code)));
   }

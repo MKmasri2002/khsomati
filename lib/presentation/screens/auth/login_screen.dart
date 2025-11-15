@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/auth/auth_cubit.dart';
+import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_size.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/presentation/widget/custom_phone.dart';
 import 'package:khsomati/router/route_string.dart';
 
@@ -19,6 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.read<LocalizationCubit>().translate;
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -33,7 +36,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: EdgeInsets.all(16),
                   child: Text(
-                    'Welcome To ',
+                    t(AppTranslation.welcomeTo),
                     style: TextStyle(
                       fontFamily: 'Lato',
                       fontSize: AppSize.width * 0.06,
@@ -47,7 +50,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 22.0),
                   child: Text(
-                    'Khosomati',
+                    t(AppTranslation.khosomati),
                     style: TextStyle(
                       fontFamily: 'Lato',
                       //fontSize: 22.39 ,
@@ -64,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
                 Center(
                   child: SizedBox(
-                    height: 55,
+                    height: 60,
                     width: AppSize.width * 0.6,
                     child: ElevatedButton(
                       onPressed: () {
@@ -101,7 +104,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               ),
                             );
                           } else {
-                            return Text("Login");
+                            return Text(t(AppTranslation.login));
                           }
                         },
                         listener: (context, state) {

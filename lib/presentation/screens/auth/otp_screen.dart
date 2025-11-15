@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/auth/auth_cubit.dart';
+import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/router/route_string.dart';
 import 'package:pinput/pinput.dart';
 
@@ -18,6 +20,7 @@ class _OtpScreenState extends State<OtpScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.read<LocalizationCubit>().translate;
     return SafeArea(
       child: Scaffold(
         body: Form(
@@ -29,7 +32,7 @@ class _OtpScreenState extends State<OtpScreen> {
                 children: [
                   SizedBox(height: 80),
                   Text(
-                    'We Have Sent An OTP On Your Number',
+                    t(AppTranslation.weHaveSentAnOTPOnYourNumber),
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 22,
@@ -91,8 +94,12 @@ class _OtpScreenState extends State<OtpScreen> {
                             );
                           } else {
                             return Text(
-                              "confirm code",
-                              style: TextStyle(color: AppColors.white),
+                              t(AppTranslation.confirmcode),
+                              style: TextStyle(
+                                color: AppColors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ),
                             );
                           }
                         },

@@ -34,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen>
 
     Future.delayed(const Duration(seconds: 5), () {
       if (mounted) {
-        Navigator.pushReplacementNamed(context, '/personaldetails');
+        Navigator.pushReplacementNamed(context, RouteString.onBoarding);
       }
     });
   }
@@ -108,7 +108,7 @@ class _SplashScreenState extends State<SplashScreen>
 
             SpinKitCircle(color: AppColors.primary),
             const SizedBox(height: 10),
-             Text(
+            Text(
               t(AppTranslation.welcome),
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),

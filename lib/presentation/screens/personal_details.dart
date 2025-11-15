@@ -1,8 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_size.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/presentation/widget/text_feild.dart';
 
 class PersonalDetails extends StatefulWidget {
@@ -56,6 +59,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.read<LocalizationCubit>().translate;
     return SafeArea(
       child: Scaffold(
         body: SingleChildScrollView(
@@ -119,7 +123,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     Expanded(
                       child: CustomTextFormField(
                         controller: fisrtNameController,
-                        hintText: 'First Name',
+                        hintText: t(AppTranslation.firstName),
                         filled: true,
                         fillColor: Colors.white,
                       ),
@@ -128,7 +132,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                     Expanded(
                       child: CustomTextFormField(
                         controller: lastNameController,
-                        hintText: 'Last Name',
+                        hintText: t(AppTranslation.lastName),
                         filled: true,
                         fillColor: Colors.white,
                       ),
@@ -145,7 +149,7 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                 ),
                 child: CustomTextFormField(
                   controller: emailController,
-                  hintText: 'E-mail Address',
+                  hintText: t(AppTranslation.emailAddress),
                   keyboardType: TextInputType.emailAddress,
                   filled: true,
                   fillColor: Colors.white,
@@ -167,14 +171,16 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                   ),
                   child: DropdownButton<String>(
                     isExpanded: true,
-                    hint: const Text('اختر الجنس'),
+                    hint: Text(t(AppTranslation.selectGender)),
                     value: _selectedGender,
-                    items: ['ذكر', 'أنثى'].map((gender) {
-                      return DropdownMenuItem(
-                        value: gender,
-                        child: Text(gender),
-                      );
-                    }).toList(),
+                    items: [t(AppTranslation.male), t(AppTranslation.female)]
+                        .map((gender) {
+                          return DropdownMenuItem(
+                            value: gender,
+                            child: Text(gender),
+                          );
+                        })
+                        .toList(),
                     onChanged: (value) {
                       setState(() {
                         _selectedGender = value;
@@ -205,8 +211,8 @@ class _PersonalDetailsState extends State<PersonalDetails> {
                         color: AppColors.primary,
                       ),
                       const SizedBox(width: 6),
-                      const Text(
-                        'Birth Day:',
+                      Text(
+                        t(AppTranslation.birthDay),
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black87,

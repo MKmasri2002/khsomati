@@ -2,7 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/layout/layout_cubit.dart';
+import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/presentation/widget/custom_drawer.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -17,6 +19,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.read<LocalizationCubit>().translate;
     return BlocSelector<LayoutCubit, LayoutState, int>(
       selector: (state) => state.currentIndex ?? 0,
       builder: (context, currentIndex) {
@@ -68,49 +71,67 @@ class _LayoutScreenState extends State<LayoutScreen> {
             ),
           ),
 
-          bottomNavigationBar: NavigationBar(
-            selectedIndex: currentIndex,
-            indicatorColor: AppColors.primary.withOpacity(0.8),
-            surfaceTintColor: Colors.white,
-            animationDuration: const Duration(milliseconds: 400),
-            // onDestinationSelected: cubit.changeNavBar,
-            onDestinationSelected: (index) {
-              context.read<LayoutCubit>().changeNavigationBar(index);
-            },
-            destinations: [
-              NavigationDestination(
-                label: "Home",
-                icon: const Icon(CupertinoIcons.house),
-                selectedIcon: const Icon(
-                  CupertinoIcons.house_fill,
-                  color: Colors.white,
+          bottomNavigationBar: NavigationBarTheme(
+            data: NavigationBarThemeData(
+              labelTextStyle: WidgetStateProperty.resolveWith<TextStyle>((
+                states,
+              ) {
+                if (states.contains(WidgetState.selected)) {
+                  return TextStyle(
+                    fontSize: 14, // حجم الخط عند التحديد
+                    fontWeight: FontWeight.bold,
+                    color: AppColors.black,
+                  );
+                }
+                return TextStyle(
+                  fontSize: 16, // حجم الخط العادي
+                  color: Colors.black,
+                );
+              }),
+            ),
+            child: NavigationBar(
+              selectedIndex: currentIndex,
+              indicatorColor: AppColors.primary.withOpacity(0.8),
+              surfaceTintColor: Colors.white,
+              animationDuration: const Duration(milliseconds: 400),
+              onDestinationSelected: (index) {
+                context.read<LayoutCubit>().changeNavigationBar(index);
+              },
+              destinations: [
+                NavigationDestination(
+                  label: t(AppTranslation.home),
+                  icon: const Icon(CupertinoIcons.house),
+                  selectedIcon: const Icon(
+                    CupertinoIcons.house_fill,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              NavigationDestination(
-                label: "Notifications",
-                icon: const Icon(Icons.delivery_dining_outlined),
-                selectedIcon: const Icon(
-                  Icons.delivery_dining,
-                  color: Colors.white,
+                NavigationDestination(
+                  label: t(AppTranslation.notifications),
+                  icon: const Icon(CupertinoIcons.bell),
+                  selectedIcon: const Icon(
+                    CupertinoIcons.bell_fill,
+                    color: Colors.white,
+                  ),
                 ),
-              ),
-              NavigationDestination(
-                label: "Test",
-                icon: Icon(CupertinoIcons.archivebox),
-                selectedIcon: Icon(
-                  CupertinoIcons.archivebox,
-                  color: AppColors.white,
+                NavigationDestination(
+                  label: "Test",
+                  icon: const Icon(CupertinoIcons.archivebox),
+                  selectedIcon: Icon(
+                    CupertinoIcons.archivebox,
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
-              NavigationDestination(
-                label: "Profile",
-                icon: Icon(CupertinoIcons.profile_circled),
-                selectedIcon: Icon(
-                  CupertinoIcons.profile_circled,
-                  color: AppColors.white,
+                NavigationDestination(
+                  label: t(AppTranslation.profile),
+                  icon: const Icon(CupertinoIcons.profile_circled),
+                  selectedIcon: Icon(
+                    CupertinoIcons.profile_circled,
+                    color: AppColors.white,
+                  ),
                 ),
-              ),
-            ],
+              ],
+            ),
           ),
         );
       },

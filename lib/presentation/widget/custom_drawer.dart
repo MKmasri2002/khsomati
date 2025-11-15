@@ -1,8 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_constant.dart';
 import 'package:khsomati/constants/app_size.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 
 class CustomDrawer extends StatelessWidget {
   const CustomDrawer({super.key});
@@ -23,6 +26,7 @@ class CustomComponentsDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final t = context.read<LocalizationCubit>().translate;
     return Column(
       children: [
         // حافظنا على مسافة كبيرة في الأعلى
@@ -37,7 +41,7 @@ class CustomComponentsDrawer extends StatelessWidget {
           child: Column(
             children: [
               ListTileWidget(
-                text: "Profile",
+                text: t(AppTranslation.profile),
                 leading: Icons.person_outline,
                 onTap: () {},
               ),
@@ -49,11 +53,11 @@ class CustomComponentsDrawer extends StatelessWidget {
                 title: Row(
                   children: [
                     Text(
-                      "اللغات",
+                      t(AppTranslation.languages),
                       style: Theme.of(context).textTheme.titleLarge,
                     ),
                     const Spacer(),
-                    Text("English"),
+                    Text(t(AppTranslation.english)),
                   ],
                 ),
                 onTap: () {},
@@ -62,14 +66,14 @@ class CustomComponentsDrawer extends StatelessWidget {
               SizedBox(height: 10), // مسافة أقل
 
               ListTileWidget(
-                text: "Support",
+                text: t(AppTranslation.support),
                 leading: CupertinoIcons.question_circle,
                 onTap: () {},
               ),
 
               SizedBox(height: 10), // مسافة أقل
               ListTileWidget(
-                text: "Notifications",
+                text: t(AppTranslation.notifications),
                 leading: CupertinoIcons.bell,
                 onTap: () {},
               ),
@@ -77,14 +81,14 @@ class CustomComponentsDrawer extends StatelessWidget {
               SizedBox(height: 10), // مسافة أقل
 
               ListTileWidget(
-                text: "Privacy & Polices",
+                text: t(AppTranslation.privacypolices),
                 leading: Icons.privacy_tip_outlined,
                 onTap: () {},
               ),
 
               SizedBox(height: 10), // مسافة أقل
               ListTileWidget(
-                text: "About The App",
+                text: t(AppTranslation.aboutTheApp),
                 leading: Icons.app_settings_alt,
                 onTap: () {},
               ),
@@ -93,7 +97,7 @@ class CustomComponentsDrawer extends StatelessWidget {
 
               ListTileWidget(
                 isLogout: true,
-                text: "Log Out",
+                text: t(AppTranslation.logOut),
                 leading: Icons.logout,
                 onTap: () {
                   // showCupertinoDialog(
