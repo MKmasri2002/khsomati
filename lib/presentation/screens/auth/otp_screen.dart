@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:khsomati/business_logic/cubit/cubit/auth_cubit.dart';
+import 'package:khsomati/business_logic/cubit/auth/auth_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/router/route_string.dart';
 import 'package:pinput/pinput.dart';
@@ -15,7 +15,6 @@ class OtpScreen extends StatefulWidget {
 class _OtpScreenState extends State<OtpScreen> {
   final pinController = TextEditingController();
   final focusNode = FocusNode();
-  
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class _OtpScreenState extends State<OtpScreen> {
                           if (state is AuthLogedIn) {
                             Navigator.pushReplacementNamed(
                               context,
-                              RouteString.home,
+                              RouteString.layout,
                             );
                           }
                         },

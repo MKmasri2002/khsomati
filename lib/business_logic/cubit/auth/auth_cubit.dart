@@ -1,7 +1,7 @@
-import 'package:bloc/bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/data/models/user_model.dart';
-import 'package:meta/meta.dart';
 
 part 'auth_state.dart';
 
@@ -53,7 +53,7 @@ class AuthCubit extends Cubit<AuthState> {
         phone: userCredential.user?.phoneNumber,
         token: await userCredential.user!.getIdToken(),
       );
-      
+
       emit(AuthLogedIn());
     } catch (e) {
       emit(AuthError("message : $e"));
