@@ -19,8 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double h = MediaQuery.sizeOf(context).height;
-    double w = MediaQuery.sizeOf(context).width;
     return SafeArea(
       child: Scaffold(
         backgroundColor: AppColors.white,
@@ -53,7 +51,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     style: TextStyle(
                       fontFamily: 'Lato',
                       //fontSize: 22.39 ,
-                      fontSize: w * 0.1,
+                      fontSize: AppSize.width * 0.1,
                       fontWeight: FontWeight.w700,
                       height: 1.0,
                       letterSpacing: 0,
@@ -67,7 +65,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 Center(
                   child: SizedBox(
                     height: 55,
-                    width: w * 0.6,
+                    width: AppSize.width * 0.6,
                     child: ElevatedButton(
                       onPressed: () {
                         if (_formKay.currentState!.validate()) {

@@ -3,6 +3,7 @@ import 'package:khsomati/presentation/screens/auth/login_screen.dart';
 import 'package:khsomati/presentation/screens/auth/otp_screen.dart';
 import 'package:khsomati/presentation/screens/home_screen.dart';
 import 'package:khsomati/presentation/screens/onboarding_screen.dart';
+import 'package:khsomati/presentation/screens/personal_details.dart';
 import 'package:khsomati/presentation/screens/splash_screen.dart';
 import 'package:khsomati/router/route_string.dart';
 
@@ -17,4 +18,5 @@ Map<String, Widget Function(BuildContext)> routes = <String, WidgetBuilder>{
   },
 
   RouteString.home: (context) => HomeScreen(),
+  RouteString.personaldetails: (context) => PersonalDetails(),
 };
