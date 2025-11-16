@@ -16,14 +16,22 @@ class NotificationsScreen extends StatelessWidget {
         ),
         backgroundColor: AppColors.primary,
         title: Text(
-          "Notifications History ",
+          "Notifications History",
           style: TextStyle(fontSize: 18, color: AppColors.white),
         ),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [Text("Notifications")],
+          children: [
+            Expanded(
+              child: ListView.separated(
+                itemBuilder: (context, index) => Card(child: Text("data")),
+                separatorBuilder: (context, index) => SizedBox(height: 20),
+                itemCount: 4,
+              ),
+            ),
+          ],
         ),
       ),
     );
