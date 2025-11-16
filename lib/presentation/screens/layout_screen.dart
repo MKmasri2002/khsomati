@@ -58,38 +58,31 @@ class _LayoutScreenState extends State<LayoutScreen> {
     return BlocSelector<LayoutCubit, LayoutState, int>(
       selector: (state) => state.currentIndex ?? 0,
       builder: (context, currentIndex) {
-        // هنا يتم استخدام الـ Stack لتطبيق تأثير الحركة
         return Stack(
           children: [
-            // 👉 Drawer مخصص (يجب وضعه في الجانب الصحيح حسب الاتجاه)
             if (isDrawerOpen)
               Positioned(
                 top: 0,
                 bottom: 0,
-                // يتم تحديد الجانب (left/right) بناءً على اتجاه النص (isRtl)
                 left: isRtl ? null : 0,
                 right: isRtl ? 0 : null,
                 child: const CustomDrawer(),
               ),
 
-            /// 👉 الشاشة الرئيسية (تتحرك عند فتح الدروار)
             GestureDetector(
-              // يمكن استخدام GestureDetector لإغلاق الـ Drawer بالنقر على الشاشة الرئيسية
               onTap: isDrawerOpen ? _toggleDrawer : null,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                // تطبيق التحويلات (Translation, Scale, Rotation)
                 transform: Matrix4.translationValues(xOffset, yOffset, 0)
                   ..scale(scaleFactor)
-                  // تطبيق دوران خفيف (RotateZ)
                   ..rotateZ(isDrawerOpen ? (isRtl ? 0.05 : -0.05) : 0),
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  // إضافة حواف مستديرة عند فتح الدرج
+
                   borderRadius: isDrawerOpen
                       ? BorderRadius.circular(20)
                       : BorderRadius.circular(0),
-                  // إضافة ظل عند فتح الدرج
+
                   boxShadow: isDrawerOpen
                       ? [
                           BoxShadow(
@@ -101,16 +94,13 @@ class _LayoutScreenState extends State<LayoutScreen> {
                       : null,
                 ),
                 child: ClipRRect(
-                  // قص المحتوى لتطبيق الحدود المستديرة بشكل صحيح
                   borderRadius: isDrawerOpen
                       ? BorderRadius.circular(20)
                       : BorderRadius.circular(0),
                   child: Scaffold(
-                    // ⚠️ تم تعديل الـ AppBar
                     appBar: AppBar(
                       automaticallyImplyLeading: false,
                       backgroundColor: Colors.white,
-                      // زر فتح/إغلاق الـ Drawer
                       leading: IconButton(
                         icon: Icon(
                           isDrawerOpen
@@ -120,9 +110,8 @@ class _LayoutScreenState extends State<LayoutScreen> {
                               : Icons.menu,
                           size: 20,
                         ),
-                        onPressed: _toggleDrawer, // استدعاء _toggleDrawer
+                        onPressed: _toggleDrawer,
                       ),
-                      // ... [بقية الأكشنز في الـ AppBar] ...
                       actions: [
                         IconButton(
                           onPressed: () {
@@ -131,7 +120,6 @@ class _LayoutScreenState extends State<LayoutScreen> {
                                 builder: (context) => NotificationsScreen(),
                               ),
                             );
-                            // notificationPro.clearCount();
                           },
                           icon: Badge(
                             backgroundColor: Colors.red,
