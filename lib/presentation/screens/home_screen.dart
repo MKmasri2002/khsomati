@@ -31,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Text("ddddddddddd"),
                   SizedBox(
                     height: AppSize.height * 0.06,
                     width: AppSize.width * 0.9,
@@ -65,21 +66,145 @@ class _HomeScreenState extends State<HomeScreen> {
                         child: Image.asset(
                           onBoardingData[index].image,
                           fit: BoxFit.cover,
-                          width: double.infinity,
+                          width: AppSize.width * 0.9,
                         ),
                       );
                     },
                     options: CarouselOptions(
-                      height: 180,
+                      height: 300,
                       autoPlay: true,
                       enlargeCenterPage: true,
                       viewportFraction: 0.9,
                       onPageChanged: (index, reason) {},
                     ),
                   ),
+                  SizedBox(height: AppSize.height * 0.04),
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      'Categories',
+                      style: TextStyle(
+                        fontSize: 26,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: AppSize.height * 0.02),
+
+                  Container(
+                    height: 60,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 5,
+                      separatorBuilder: (context, index) {
+                        return SizedBox(width: AppSize.width * 0.09);
+                      },
+                      itemBuilder: (context, index) {
+                        return CustemIcons(index: index);
+                      },
+                    ),
+                  ),
+
+                  SizedBox(height: AppSize.height * 0.03),
+
+                  Row(
+                    children: [
+                      Text(
+                        "Stores in Your Area",
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          // return
+                        },
+                        child: Text("See all", style: TextStyle(fontSize: 16)),
+                      ),
+                    ],
+                  ),
+
+                  Container(
+                    height: 130,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      separatorBuilder: (context, index) {
+                        return SizedBox(width: AppSize.width * 0.09);
+                      },
+                      itemBuilder: (context, index) {
+                        return CustomStoresInYourArea();
+                      },
+                      itemCount: 10,
+                    ),
+                  ),
                 ],
               ),
             ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+// icons
+final class CustemIcons extends StatelessWidget {
+  final int index;
+  const CustemIcons({super.key, required this.index});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Column(
+        children: [
+          Container(
+            height: 40,
+            width: 40,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(400),
+              color: Colors.amber,
+            ),
+            child: ClipRRect(
+              borderRadius: BorderRadiusGeometry.circular(100),
+              child: Center(child: Icon(_icons[index])),
+            ),
+          ),
+
+          Text("Ccccccc"),
+        ],
+      ),
+    );
+  }
+}
+
+List<IconData> _icons = [
+  Icons.shopping_cart,
+  Icons.checkroom,
+  Icons.devices,
+  Icons.home_filled,
+  Icons.spa,
+];
+
+//StoresInYourArea
+class CustomStoresInYourArea extends StatelessWidget {
+  const CustomStoresInYourArea({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        height: 130,
+        width: 130,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(50),
+          color: Colors.blue,
+          image: DecorationImage(
+            image: AssetImage("assets/images/onBoarding_three.png"),
+            fit: BoxFit.cover,
           ),
         ),
       ),
