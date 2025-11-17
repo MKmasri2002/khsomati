@@ -9,34 +9,292 @@ class AddProductsScreen extends StatefulWidget {
 }
 
 class _AddProductsScreenState extends State<AddProductsScreen> {
-  final List stores = ["zara", "nike", "adidas"];
+  final List stores = ["Zara", "Nike", "Adidas", "H&M", "Pull&Bear", "Bershka"];
+  String? selectedStore; // المتجر المختار
+
+  // Controllers
+  final TextEditingController productName = TextEditingController();
+  final TextEditingController productPrice = TextEditingController();
+  final TextEditingController productDesc = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text("Add Product")),
-      body: Column(
-        children: [
-          Text("Select store or create one"),
-          Expanded(
-            child: SizedBox(
-              height: 30,
-              child: ListView.separated(
-                scrollDirection: Axis.horizontal,
-                itemBuilder: (context, index) {
-                  return SizedBox(
-                    width: 30,
-                    height: 30,
-                    child: Center(child: Text(stores[index])),
-                  );
-                },
-                separatorBuilder: (context, index) {
-                  return SizedBox(width: 20);
-                },
-                itemCount: stores.length,
+      body: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const SizedBox(height: 16),
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 12),
+              child: Text(
+                "Select store or create one",
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
               ),
             ),
+            const SizedBox(height: 12),
+
+            /// ------------------- Stores Row -------------------
+            SizedBox(
+              height: 110,
+              child: Row(
+                children: [
+                  const customButton(),
+                  const SizedBox(width: 20),
+
+                  Expanded(
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemBuilder: (context, index) {
+                        return StoreItemWidget(
+                          storeName: stores[index],
+                          isSelected: selectedStore == stores[index],
+                          onTap: () {
+                            setState(() {
+                              selectedStore = stores[index];
+                            });
+                          },
+                        );
+                      },
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 20),
+                      itemCount: stores.length,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            const SizedBox(height: 20),
+
+            /// ------------------- Product Form -------------------
+            AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              child: selectedStore == null
+                  ? const SizedBox()
+                  : Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: AnimatedContainer(
+                        duration: const Duration(milliseconds: 300),
+                        padding: const EdgeInsets.all(20),
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.grey.withOpacity(0.3),
+                              blurRadius: 10,
+                              offset: const Offset(0, 5),
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              "Selected store: $selectedStore",
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 16,
+                                color: Colors.deepPurple,
+                              ),
+                            ),
+                            const SizedBox(height: 20),
+
+                            _inputField(productName, "Product Name"),
+                            const SizedBox(height: 12),
+
+                            _inputField(
+                              productPrice,
+                              "Price",
+                              type: TextInputType.number,
+                            ),
+                            const SizedBox(height: 12),
+
+                            _inputField(
+                              productDesc,
+                              "Description",
+                              maxLines: 3,
+                            ),
+                            const SizedBox(height: 20),
+
+                            /// Save Button
+                            SizedBox(
+                              width: double.infinity,
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: 14,
+                                  ),
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15),
+                                  ),
+                                  backgroundColor: Colors.deepPurple,
+                                ),
+                                onPressed: () {
+                                  // حفظ المنتج
+                                },
+                                child: const Text(
+                                  "Save Product",
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _inputField(
+    TextEditingController controller,
+    String hint, {
+    int maxLines = 1,
+    TextInputType type = TextInputType.text,
+  }) {
+    return TextField(
+      controller: controller,
+      maxLines: maxLines,
+      keyboardType: type,
+      decoration: InputDecoration(
+        hintText: hint,
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 12,
+          vertical: 12,
+        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+      ),
+    );
+  }
+}
+
+/// =================================================================
+///                            CREATE STORE BUTTON
+/// =================================================================
+class customButton extends StatelessWidget {
+  const customButton({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {},
+      child: Container(
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: const LinearGradient(
+            colors: [Colors.purple, Colors.deepPurpleAccent],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
           ),
-        ],
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.25),
+              blurRadius: 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.add_business_rounded, color: Colors.white, size: 35),
+            SizedBox(height: 6),
+            Text(
+              "Create",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 15,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// =================================================================
+///                        STORE ITEM WITH SELECTION
+/// =================================================================
+class StoreItemWidget extends StatelessWidget {
+  final String storeName;
+  final bool isSelected;
+  final VoidCallback onTap;
+
+  const StoreItemWidget({
+    super.key,
+    required this.storeName,
+    required this.isSelected,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 300),
+        width: 100,
+        height: 100,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: isSelected
+              ? const LinearGradient(
+                  colors: [Colors.deepPurple, Colors.purple],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                )
+              : const LinearGradient(
+                  colors: [Colors.blueAccent, Colors.lightBlue],
+                  begin: Alignment.topLeft,
+                  end: Alignment.bottomRight,
+                ),
+          boxShadow: [
+            BoxShadow(
+              color: isSelected
+                  ? Colors.purple.withOpacity(0.5)
+                  : Colors.blueAccent.withOpacity(0.35),
+              blurRadius: isSelected ? 15 : 10,
+              offset: const Offset(0, 4),
+            ),
+          ],
+          border: isSelected ? Border.all(color: Colors.white, width: 3) : null,
+        ),
+        child: Stack(
+          children: [
+            Center(
+              child: Text(
+                storeName,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+
+            /// Check icon when selected
+            if (isSelected)
+              const Positioned(
+                top: 6,
+                right: 6,
+                child: Icon(Icons.check_circle, color: Colors.white, size: 22),
+              ),
+          ],
+        ),
       ),
     );
   }
