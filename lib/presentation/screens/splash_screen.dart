@@ -6,6 +6,7 @@ import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_constant.dart';
 import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/router/route_string.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,6 +19,26 @@ class _SplashScreenState extends State<SplashScreen>
     with TickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+
+  //   _controller = AnimationController(
+  //     vsync: this,
+  //     duration: const Duration(milliseconds: 1500),
+  //   );
+
+  //   _animation = CurvedAnimation(parent: _controller, curve: Curves.elasticOut);
+
+  //   _controller.forward();
+
+  //   Future.delayed(const Duration(seconds: 5), () {
+  //     if (mounted) {
+  //       Navigator.pushReplacementNamed(context, RouteString.onBoarding);
+  //     }
+  //   });
+  // }
 
   @override
   void initState() {
@@ -32,11 +53,25 @@ class _SplashScreenState extends State<SplashScreen>
 
     _controller.forward();
 
-    Future.delayed(const Duration(seconds: 5), () {
-      if (mounted) {
-        Navigator.pushReplacementNamed(context, RouteString.onBoarding);
+    _checkLoginStatusAndNavigate();
+  }
+
+  void _checkLoginStatusAndNavigate() async {
+    await Future.delayed(const Duration(seconds: 5));
+
+    if (mounted) {
+      final SharedPreferences prfes = await SharedPreferences.getInstance();
+      final bool isLoggedIn = prfes.getBool('isLoggedIn') ?? false;
+
+      String nextRoute;
+      if (isLoggedIn) {
+        nextRoute = RouteString.layout;
+      } else {
+        nextRoute = RouteString.onBoarding;
       }
-    });
+
+      Navigator.pushReplacementNamed(context, nextRoute);
+    }
   }
 
   @override

@@ -8,15 +8,12 @@ class ForgetPasswordWidget extends StatelessWidget {
   final formKey = GlobalKey<FormState>();
   final emailController = TextEditingController();
 
-  // ✅ دالة النسيان، تمرر context حتى تقدر تستخدمه
   void _forgetPassword(BuildContext context) {
     if (formKey.currentState!.validate()) {
       // final email = emailController.text.trim();
 
-      // // استدعاء Cubit
       // context.read<AuthCubit>().forgetPassword(email);
 
-      // // الانتقال إلى شاشة OTP
       // Navigator.of(context).push(
       //   MaterialPageRoute(builder: (context) => OtpCodeScreen(email: email)),
       // );
@@ -52,7 +49,6 @@ class ForgetPasswordWidget extends StatelessWidget {
               // MainButton(
               //   text: KeysTranslate.send.tr(context),
               //   onPressed: () =>
-              //       _forgetPassword(context), // ✅ تمرير الـ context
               // ),
             ],
           ),

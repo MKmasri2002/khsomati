@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/layout/layout_cubit.dart';
 import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
+import 'package:khsomati/data/models/notifications_model.dart';
 import 'package:khsomati/presentation/screens/notifications_screen.dart';
 import 'package:khsomati/presentation/widget/custom_drawer.dart';
 
@@ -27,13 +28,11 @@ class _LayoutScreenState extends State<LayoutScreen> {
       final bool isDesktop = MediaQuery.of(context).size.width >= 1100;
 
       if (isDrawerOpen) {
-        // إغلاق الدرج
         xOffset = 0;
         yOffset = 0;
         scaleFactor = 1;
         isDrawerOpen = false;
       } else {
-        // فتح الدرج وفقًا لنوع الجهاز (هاتف/ديسكتوب)
         final double drawerWidth = isDesktop
             ? MediaQuery.of(context).size.width * 0.3
             : MediaQuery.of(context).size.width * 0.66;
@@ -197,7 +196,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                               },
                               icon: Badge(
                                 backgroundColor: Colors.red,
-                                label: Text("${4}"),
+                                label: Text("${list.length}"),
                                 textColor: Colors.white,
                                 child: const Icon(CupertinoIcons.bell),
                               ),
@@ -249,8 +248,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
                                   false, // يتم التعامل مع الإغلاق في onTap لـ GestureDetector أعلاه
                               color: Colors
                                   .transparent, // اللون الشفاف للسماح بالرؤية
-                              onDismiss:
-                                  _toggleDrawer, // يمكنك إزالة هذا إذا كنت تعتمد على الـ GestureDetector الخارجي
+                              onDismiss: _toggleDrawer,
                             ),
                         ],
                       ),

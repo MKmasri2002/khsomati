@@ -2,6 +2,7 @@ import 'package:khsomati/constants/translation/app_translation.dart';
 
 class Ar {
   static const trannslation = {
+    AppTranslation.addProducts: "إضافة منتج",
     AppTranslation.welcome: "مرحبا بكم",
     AppTranslation.skip: "تخطي",
     AppTranslation.next: "التالي",

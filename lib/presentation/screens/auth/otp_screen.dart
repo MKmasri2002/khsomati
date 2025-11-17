@@ -7,6 +7,7 @@ import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/router/route_string.dart';
 import 'package:lottie/lottie.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key, required this.verificationId});
@@ -16,6 +17,7 @@ class OtpScreen extends StatefulWidget {
 }
 
 class _OtpScreenState extends State<OtpScreen> {
+  final keyOtp = GlobalKey<FormState>();
   final pinController = TextEditingController();
   final focusNode = FocusNode();
 
@@ -25,6 +27,7 @@ class _OtpScreenState extends State<OtpScreen> {
     return SafeArea(
       child: Scaffold(
         body: Form(
+          key: keyOtp,
           child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(22),
@@ -89,12 +92,16 @@ class _OtpScreenState extends State<OtpScreen> {
                     width: double.infinity,
                     height: 55,
                     child: ElevatedButton(
-                      onPressed: () {
-                        // if()
-                        //context.read<AuthCubit>().verifyCode(
-                        //   verificationId: widget.verificationId,
-                        //   smsCode: pinController.text,
-                        // );
+                      onPressed: () async {
+                        if (keyOtp.currentState!.validate()) {
+                          await context.read<AuthCubit>().verifyCode(
+                            verificationId: widget.verificationId,
+                            smsCode: pinController.text,
+                          );
+                        } else {
+                          // return
+                          print("error");
+                        }
                       },
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
@@ -119,19 +126,23 @@ class _OtpScreenState extends State<OtpScreen> {
                             );
                           }
                         },
-                        listener: (BuildContext context, AuthState state) {
-                          if (state is AuthLogedIn) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              RouteString.layout,
-                            );
-                          } else if (state is AuthUserNotExists) {
-                            Navigator.pushReplacementNamed(
-                              context,
-                              RouteString.personaldetails,
-                            );
-                          }
-                        },
+                        listener:
+                            (BuildContext context, AuthState state) async {
+                              if (state is AuthLogedIn) {
+                                final SharedPreferences prefs =
+                                    await SharedPreferences.getInstance();
+                                await prefs.setBool('isLoggedIn', true);
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  RouteString.layout,
+                                );
+                              } else if (state is AuthUserNotExists) {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  RouteString.personaldetails,
+                                );
+                              }
+                            },
                       ),
                     ),
                   ),

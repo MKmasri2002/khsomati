@@ -8,6 +8,7 @@ import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/presentation/widget/custom_phone.dart';
 import 'package:khsomati/router/route_string.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -112,7 +113,18 @@ class _LoginScreenState extends State<LoginScreen> {
                               return Text(t(AppTranslation.login));
                             }
                           },
-                          listener: (context, state) {
+                          listener: (context, state) async {
+                            if (state is AuthLogedIn) {
+                              // final SharedPreferences prefs =
+                              //     await SharedPreferences.getInstance();
+                              // await prefs.setBool('isLoggedIn', true);
+
+                              // 2. الانتقال إلى الصفحة الرئيسية (Home Page)
+                              Navigator.pushReplacementNamed(
+                                context,
+                                RouteString.layout,
+                              );
+                            }
                             if (state is CodeSentState) {
                               Navigator.pushReplacementNamed(
                                 context,
