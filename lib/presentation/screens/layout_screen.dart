@@ -19,6 +19,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   double yOffset = 0;
   double scaleFactor = 1;
   bool isDrawerOpen = false;
+  String? _selectedValue;
 
   void _toggleDrawer() {
     setState(() {
@@ -107,35 +108,102 @@ class _LayoutScreenState extends State<LayoutScreen> {
                       appBar: AppBar(
                         automaticallyImplyLeading: false,
                         backgroundColor: Colors.white,
-                        leading: IconButton(
-                          icon: Icon(
-                            isDrawerOpen
-                                ? (isRtl
-                                      ? Icons.arrow_forward_ios
-                                      : Icons.arrow_back_ios)
-                                : Icons.menu,
-                            size: 20,
-                            // Icons.menu
-                          ),
-                          onPressed: _toggleDrawer,
-                        ),
-                        actions: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.of(context).push(
-                                CupertinoPageRoute(
-                                  builder: (context) => NotificationsScreen(),
-                                ),
-                              );
-                            },
-                            icon: Badge(
-                              backgroundColor: Colors.red,
-                              label: Text("${4}"),
-                              textColor: Colors.white,
-                              child: const Icon(CupertinoIcons.bell),
+                        elevation: 0,
+                        title: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // 1️⃣ أيقونة Drawer
+                            IconButton(
+                              icon: Icon(
+                                isDrawerOpen
+                                    ? (isRtl
+                                          ? Icons.arrow_forward_ios
+                                          : Icons.arrow_back_ios)
+                                    : Icons.menu,
+                                size: 24,
+                              ),
+                              onPressed: _toggleDrawer,
                             ),
-                          ),
-                        ],
+
+                            //  Dropdown في الوسط
+                            Expanded(
+                              child: Center(
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(horizontal: 14),
+                                  decoration: BoxDecoration(
+                                    color: AppColors.primary.withOpacity(0.1),
+                                    borderRadius: BorderRadius.circular(16),
+                                  ),
+                                  child: DropdownButtonHideUnderline(
+                                    child: DropdownButton<String>(
+                                      value: _selectedValue,
+                                      isExpanded: true,
+                                      icon: Icon(
+                                        Icons.keyboard_arrow_down,
+                                        color: Colors.black,
+                                      ),
+                                      hint: const Text(
+                                        "Select Location",
+                                        style: TextStyle(color: Colors.black87),
+                                      ),
+                                      borderRadius: BorderRadius.circular(20),
+                                      dropdownColor: AppColors.darkSecondary,
+                                      items:
+                                          [
+                                            "Location",
+                                            "إربد",
+                                            "عجلون",
+                                            "جرش",
+                                            "المفرق",
+                                            "البلقاء",
+                                            "عمّان",
+                                            "الزرقاء",
+                                            "مادبا",
+                                            "الكرك",
+                                            "الطفيلة",
+                                            "معان",
+                                            "العقبة",
+                                          ].map((location) {
+                                            return DropdownMenuItem(
+                                              value: location,
+                                              child: Text(
+                                                location,
+                                                style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: Colors.grey[500],
+                                                ),
+                                              ),
+                                            );
+                                          }).toList(),
+                                      onChanged: (value) {
+                                        setState(() {
+                                          _selectedValue = value;
+                                        });
+                                      },
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+
+                            // 3️⃣ أيقونة الإشعارات
+                            IconButton(
+                              onPressed: () {
+                                Navigator.of(context).push(
+                                  CupertinoPageRoute(
+                                    builder: (context) => NotificationsScreen(),
+                                  ),
+                                );
+                              },
+                              icon: Badge(
+                                backgroundColor: Colors.red,
+                                label: Text("${4}"),
+                                textColor: Colors.white,
+                                child: const Icon(CupertinoIcons.bell),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
 
                       // ⚠️ تم تعديل الـ body

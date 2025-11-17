@@ -31,7 +31,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text("ddddddddddd"),
                   SizedBox(
                     height: AppSize.height * 0.06,
                     width: AppSize.width * 0.9,
@@ -81,20 +80,28 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   SizedBox(height: AppSize.height * 0.04),
-                  Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      'Categories',
-                      style: TextStyle(
-                        fontSize: 26,
-                        fontWeight: FontWeight.bold,
+                  Row(
+                    children: [
+                      Text(
+                        "Discounts",
+                        style: TextStyle(
+                          fontSize: 26,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
+                      Spacer(),
+                      TextButton(
+                        onPressed: () {
+                          // return
+                        },
+                        child: Text("See all", style: TextStyle(fontSize: 16)),
+                      ),
+                    ],
                   ),
                   SizedBox(height: AppSize.height * 0.02),
 
                   Container(
-                    height: 60,
+                    height: 130,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 5,
@@ -102,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         return SizedBox(width: AppSize.width * 0.09);
                       },
                       itemBuilder: (context, index) {
-                        return CustemIcons(index: index);
+                        return CustomStoresInYourArea();
                       },
                     ),
                   ),
@@ -152,43 +159,43 @@ class _HomeScreenState extends State<HomeScreen> {
 }
 
 // icons
-final class CustemIcons extends StatelessWidget {
-  final int index;
-  const CustemIcons({super.key, required this.index});
+// final class CustemIcons extends StatelessWidget {
+//   final int index;
+//   const CustemIcons({super.key, required this.index});
 
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {},
-      child: Column(
-        children: [
-          Container(
-            height: 40,
-            width: 40,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(400),
-              color: Colors.amber,
-            ),
-            child: ClipRRect(
-              borderRadius: BorderRadiusGeometry.circular(100),
-              child: Center(child: Icon(_icons[index])),
-            ),
-          ),
+//   @override
+//   Widget build(BuildContext context) {
+//     return GestureDetector(
+//       onTap: () {},
+//       child: Column(
+//         children: [
+//           Container(
+//             height: 40,
+//             width: 40,
+//             decoration: BoxDecoration(
+//               borderRadius: BorderRadius.circular(400),
+//               color: Colors.amber,
+//             ),
+//             child: ClipRRect(
+//               borderRadius: BorderRadiusGeometry.circular(100),
+//               child: Center(child: Icon(_icons[index])),
+//             ),
+//           ),
 
-          Text("Ccccccc"),
-        ],
-      ),
-    );
-  }
-}
+//           Text("Ccccccc"),
+//         ],
+//       ),
+//     );
+//   }
+// }
 
-List<IconData> _icons = [
-  Icons.shopping_cart,
-  Icons.checkroom,
-  Icons.devices,
-  Icons.home_filled,
-  Icons.spa,
-];
+// List<IconData> _icons = [
+//   Icons.shopping_cart,
+//   Icons.checkroom,
+//   Icons.devices,
+//   Icons.home_filled,
+//   Icons.spa,
+// ];
 
 //StoresInYourArea
 class CustomStoresInYourArea extends StatelessWidget {
