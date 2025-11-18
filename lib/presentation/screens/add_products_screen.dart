@@ -12,7 +12,7 @@ class AddProductsScreen extends StatefulWidget {
 class _AddProductsScreenState extends State<AddProductsScreen> {
   final _formKey = GlobalKey<FormState>();
   final List stores = ["Zara", "Nike", "Adidas", "H&M", "Pull&Bear", "Bershka"];
-  String? selectedStore; // المتجر المختار
+  String? selectedStore;
 
   // Controllers
   final TextEditingController productName = TextEditingController();
