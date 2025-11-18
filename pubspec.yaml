@@ -31,6 +31,11 @@ dependencies:
   intl_phone_field: ^3.2.0
   lottie: ^3.3.2
   permission_handler: ^12.0.1
+
+
+  firebase_messaging: ^16.0.4
+
+
   shared_preferences: ^2.5.3
   pinput: ^5.0.2
   url_launcher: ^6.3.2

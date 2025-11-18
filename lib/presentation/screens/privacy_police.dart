@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_html/flutter_html.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
-
 class PrivacyPolicyScreen extends StatelessWidget {
   const PrivacyPolicyScreen({super.key});
 
