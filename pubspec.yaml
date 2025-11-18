@@ -27,15 +27,8 @@ dependencies:
   intl_phone_field: ^3.2.0
   lottie: ^3.3.2
   permission_handler: ^12.0.1
-<<<<<<< HEAD
   firebase_messaging: ^16.0.4
   flutter_local_notifications: ^19.5.0
-=======
-  pinput: ^3.0.1
-  shared_preferences: ^2.5.3
-  smooth_page_indicator: ^1.2.1
-  table_calendar: ^3.2.0
->>>>>>> 2f8cd625a159c85b2936247ab527d0c1e14a23f0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
