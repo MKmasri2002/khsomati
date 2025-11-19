@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:khsomati/presentation/screens/home_screen.dart';
 import 'package:khsomati/presentation/screens/notifications_screen.dart';
 import 'package:khsomati/presentation/screens/profile_screen.dart';
-import 'package:khsomati/presentation/screens/shop_screen.dart';
 
 part 'layout_state.dart';
 class LayoutCubit extends Cubit<LayoutState> {

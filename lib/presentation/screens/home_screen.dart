@@ -5,7 +5,6 @@ import 'package:khsomati/business_logic/cubit/product/product_cubit.dart';
 import 'package:khsomati/business_logic/cubit/store/store_cubit.dart';
 import 'package:khsomati/business_logic/cubit/store/store_state.dart';
 import 'package:khsomati/constants/app_size.dart';
-import 'package:khsomati/data/models/on_boarding_model.dart';
 import 'package:khsomati/data/models/store_model.dart';
 import 'package:khsomati/presentation/widget/text_feild.dart';
 import 'package:khsomati/router/route_string.dart';

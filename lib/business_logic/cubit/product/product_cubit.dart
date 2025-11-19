@@ -21,10 +21,8 @@ class ProductCubit extends Cubit<ProductState> {
 
     try {
       String imageUrl = "";
-      if (image != null) {
-        imageUrl = await uploadToImgbb(image);
-      }
-
+      imageUrl = await uploadToImgbb(image);
+    
       final doc = FirebaseFirestore.instance.collection('product').doc();
       final id = doc.id;
       ProductModel product = ProductModel(
