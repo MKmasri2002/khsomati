@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/layout/layout_cubit.dart';
 import 'package:khsomati/business_logic/cubit/localization/localization_cubit.dart';
 import 'package:khsomati/constants/app_colors.dart';
+import 'package:khsomati/constants/translation/app_translation.dart';
 import 'package:khsomati/data/models/notifications_model.dart';
 import 'package:khsomati/presentation/screens/notifications_screen.dart';
 import 'package:khsomati/presentation/widget/custom_drawer.dart';
