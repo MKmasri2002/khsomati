@@ -26,6 +26,8 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
 
   final TextEditingController productName = TextEditingController();
   final TextEditingController productPrice = TextEditingController();
+  final TextEditingController productPriceAfterDiscount =
+      TextEditingController();
   final TextEditingController productDesc = TextEditingController();
 
   Uint8List? image;
@@ -207,6 +209,21 @@ class _AddProductsScreenState extends State<AddProductsScreen> {
                               _inputField(
                                 productPrice,
                                 "Price",
+                                type: TextInputType.number,
+                                validator: (value) {
+                                  if (value == null || value.trim().isEmpty) {
+                                    return "Price is required";
+                                  }
+                                  if (double.tryParse(value) == null) {
+                                    return "Price must be a valid number";
+                                  }
+                                  return null;
+                                },
+                              ),
+                              const SizedBox(height: 12),
+                              _inputField(
+                                productPriceAfterDiscount,
+                                "Price After Discount",
                                 type: TextInputType.number,
                                 validator: (value) {
                                   if (value == null || value.trim().isEmpty) {

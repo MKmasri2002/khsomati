@@ -38,6 +38,7 @@ class StoreItem extends StatelessWidget {
                   width: 130,
                   height: 95,
                   decoration: const BoxDecoration(
+                    color: AppColors.white,
                     borderRadius: BorderRadius.vertical(
                       top: Radius.circular(20),
                     ),

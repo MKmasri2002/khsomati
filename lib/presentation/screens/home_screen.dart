@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:khsomati/business_logic/cubit/product/product_cubit.dart';
 import 'package:khsomati/business_logic/cubit/store/store_cubit.dart';
 import 'package:khsomati/business_logic/cubit/store/store_state.dart';
+import 'package:khsomati/constants/app_colors.dart';
 import 'package:khsomati/constants/app_size.dart';
 import 'package:khsomati/data/models/store_model.dart';
 import 'package:khsomati/presentation/widget/text_feild.dart';
@@ -28,7 +29,7 @@ class _HomeScreenState extends State<HomeScreen> {
     final List<StoreModel> stores = context.read<StoreCubit>().allStores;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.thirdWhite,
         body: SingleChildScrollView(
           child: Form(
             key: _formKey,
